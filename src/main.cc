@@ -1,22 +1,12 @@
 #include<iostream>
-#include<SFML/Graphics.hpp>
-#include "Constants.hh"
+
+#include "Game.hh"
 
 int main()
 {
-  sf::RenderWindow* window{new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "My game")};
-  sf::Event event;
+  Game* game{new Game()};
+  game->Init();
 
-  while (window->isOpen())
-  {
-    while (window->pollEvent(event))
-    {
-      if(event.type == sf::Event::Closed)
-      {
-        window->close();
-      }
-    }
-  }
-  delete window;
-  return 0;
+  delete game;
+  return EXIT_SUCCESS;
 }
