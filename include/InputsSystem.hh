@@ -3,7 +3,6 @@
 
 struct InputsSystem
 {
-
   static sf::Vector2f GetAxis()
   {
     sf::Vector2f axis{};
