@@ -29,3 +29,13 @@ b2Body* Rigidbody::GetBody() const
 {
   return body;
 }
+
+sf::Vector2f Rigidbody::GetPositionSFML() const
+{
+  return sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
+}
+
+void Rigidbody::Move(b2Vec2 direction)
+{
+    body->SetLinearVelocity(direction);
+}

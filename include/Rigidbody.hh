@@ -1,5 +1,6 @@
 #pragma once
 #include<box2d/box2d.h>
+#include "SFML/Graphics.hpp"
 
 class Rigidbody
 {
@@ -17,4 +18,6 @@ public:
   ~Rigidbody();
 
   b2Body* GetBody() const;
+  sf::Vector2f GetPositionSFML() const;
+  void Move(b2Vec2 direction);
 };
