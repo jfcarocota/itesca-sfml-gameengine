@@ -15,20 +15,32 @@ const float playerSpeed{200.f};
 const float playerScale{4.f};
 
 Character* character1{};
-
+GameObject* chest1{};
+GameObject* chest2{};
 
 Game::Game()
 {
   window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_NAME);
   event = new sf::Event();
 
-  gravity = new b2Vec2(0.f, -9.8f);
-  //gravity = new b2Vec2(0.f, 0.f);
+  //gravity = new b2Vec2(0.f, -9.8f);
+  gravity = new b2Vec2(0.f, 0.f);
   world = new b2World(*gravity);
   drawPhysics = new DrawPhysics(window);
+  gameObjects = new std::vector<GameObject*>();
 
-  character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
+  character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f,
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
+
+  chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
+  new sf::Vector2f(300, 300), b2BodyType::b2_staticBody, window, world);
+
+  chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
+  new sf::Vector2f(500, 600), b2BodyType::b2_dynamicBody, window, world);
+
+  gameObjects->push_back(character1);
+  gameObjects->push_back(chest1);
+  gameObjects->push_back(chest2);
 }
 
 Game::~Game()
@@ -42,7 +54,10 @@ void Game::Inputs()
 
 void Game::Draw()
 {
-  character1->Draw();
+  for(auto& gameObject : *gameObjects)
+  {
+    gameObject->Draw();
+  }
   world->DebugDraw();
 }
 
@@ -84,7 +99,10 @@ void Game::Update()
 
     Inputs();
 
-    character1->Update(deltaTime);
+    for(auto& gameObject : *gameObjects)
+    {
+      gameObject->Update(deltaTime);
+    }
     Render();
   }
 

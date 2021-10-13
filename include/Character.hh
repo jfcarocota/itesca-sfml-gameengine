@@ -2,17 +2,11 @@
 
 #include<SFML/Graphics.hpp>
 #include "Rigidbody.hh"
+#include "GameObject.hh"
 
-class Character
+class Character : public GameObject
 {
 private:
-  sf::Texture* texture{};
-  sf::Sprite* sprite{};
-  Rigidbody* rigidbody{};
-  sf::CircleShape* pivotPoint{};
-  sf::RenderWindow* window{};
-  b2World* world{};
-  float scale{};
   float moveSpeed{};
 
   void Move();
@@ -22,8 +16,8 @@ public:
   sf::Vector2f* position, sf::RenderWindow*& window, b2World*& world);
   ~Character();
 
-  void Update(float& deltaTime);
-  void Draw();
+  void Update(float& deltaTime) override;
+  void Draw() override;
 
   sf::Sprite* GetSprite() const;
 };

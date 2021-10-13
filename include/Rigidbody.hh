@@ -20,4 +20,5 @@ public:
   b2Body* GetBody() const;
   sf::Vector2f GetPositionSFML() const;
   void Move(b2Vec2 direction);
+  void SetRotationFreeze(bool freezeRotation);
 };
