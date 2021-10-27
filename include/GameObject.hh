@@ -2,12 +2,12 @@
 
 #include "Rigidbody.hh"
 #include "SFML/Graphics.hpp"
+#include "Drawable.hh"
 
 class GameObject
 {
 protected:
-  sf::Texture* texture{};
-  sf::Sprite* sprite{};
+  Drawable* drawable{};
   Rigidbody* rigidbody{};
   sf::CircleShape* pivotPoint{};
   sf::RenderWindow* window{};

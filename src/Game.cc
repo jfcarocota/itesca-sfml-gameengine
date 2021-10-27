@@ -6,6 +6,7 @@
 #include "Rigidbody.hh"
 #include "Character.hh"
 #include<iostream>
+#include "TileGroup.hh"
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
@@ -17,6 +18,8 @@ const float playerScale{4.f};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
+
+TileGroup* tileGroup{};
 
 Game::Game()
 {
@@ -36,7 +39,9 @@ Game::Game()
   new sf::Vector2f(300, 300), b2BodyType::b2_staticBody, window, world);
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
-  new sf::Vector2f(500, 600), b2BodyType::b2_dynamicBody, window, world);
+  new sf::Vector2f(500, 400), b2BodyType::b2_dynamicBody, window, world);
+
+  tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
   gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
@@ -54,6 +59,7 @@ void Game::Inputs()
 
 void Game::Draw()
 {
+  tileGroup->Draw();
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();

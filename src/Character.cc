@@ -13,8 +13,8 @@ GameObject(textureUrl, col, row, width, height, scale, position, b2BodyType::b2_
 
   rigidbody->SetRotationFreeze(true);
 
-  idleAnimation = new Animation(0, 5, sprite, 0.05f, 5);
-  runAnimation = new Animation(0, 5, sprite, 0.08f, 6);
+  idleAnimation = new Animation(0, 5, drawable, 0.05f, 5);
+  runAnimation = new Animation(0, 5, drawable, 0.08f, 6);
 }
 
 Character::~Character()
@@ -45,9 +45,9 @@ void Character::Update(float& deltaTime)
 
 void Character::FlipSprite()
 {
-    sprite->setScale(InputsSystem::GetAxis().x > 0 ? scale :
+    drawable->GetSprite()->setScale(InputsSystem::GetAxis().x > 0 ? scale :
     InputsSystem::GetAxis().x < 0 ? -scale :
-    sprite->getScale().x, sprite->getScale().y);
+    drawable->GetSprite()->getScale().x, drawable->GetSprite()->getScale().y);
 }
 
 void Character::Move()
@@ -57,5 +57,5 @@ void Character::Move()
 
 sf::Sprite* Character::GetSprite() const
 {
-  return sprite;
+  return drawable->GetSprite();
 }
